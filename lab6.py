@@ -5,6 +5,7 @@ from scipy.stats import t
 from random import randrange
 from math import sqrt
 from math import fabs as fab
+import time
 
 
 class Critical_values:
@@ -231,8 +232,16 @@ while not adequacy:
 
     print("\tКритерій Фішера")
     d = 11 - student_lst.count(0)
-    if fisher_test():
-        print("\t\tРівняння регресії адекватне стосовно оригіналу")
+    t = time.time() + 10
+    adecvatne = 0
+    neadecvatne = 0
+    print("Цикл програми 10 секунд, підрахувуємо скільки разів отримає адекватну та неадекватну...\n...")
+    while t > time.time():
         adequacy = True
-    else:
-        print("\t\tРівняння регресії неадекватне стосовно оригіналу\n\t Проводимо експеремент повторно!")
+        if fisher_test():
+            #print("\t\tРівняння регресії адекватне стосовно оригіналу\n\t Проводимо експеремент повторно!")
+            adecvatne += 1
+        else:
+            #print("\t\tРівняння регресії неадекватне стосовно оригіналу\n\t Проводимо експеремент повторно!")
+            neadecvatne += 1
+    print("Рівняння регресії адекватне стосовно оригіналу", adecvatne, "\nРівняння регресії неадекватне стосовно оригіналу", neadecvatne)
